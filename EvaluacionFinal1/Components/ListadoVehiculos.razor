@@ -1,1 +1,23 @@
-﻿
+﻿@using Models
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+
+<h3>Listado de Vehículos</h3>
+
+@if (vehiculos == null || vehiculos.Count == 0)
+{
+	<p>No hay vehículos registrados.</p>
+}
+else
+{
+	<p><strong>Total de vehículos:</strong> @vehiculos.Count</p>
+}
+
+@code {
+	private List<Vehiculos> vehiculos = new();
+
+	protected override void OnInitialized()
+	{
+		vehiculos = localStorage.GetItem<List<Vehiculos>>("archivo_vehiculos") ?? new();
+	}
+}

@@ -117,6 +117,7 @@
 @code {
     private string TipoSeleccionado = "Automovil";
 
+   
     private Automovil automovil = new();
     private Motocicleta motocicleta = new();
     private Camion camion = new();
@@ -127,6 +128,10 @@
         lista.Add(automovil);
         localStorage.SetItem("automoviles", lista);
         NavigationManager.NavigateTo("/listado-automoviles");
+        var vehiculosGenerales = localStorage.GetItem<List<Vehiculos>>("archivo_vehiculos") ?? new();
+        vehiculosGenerales.Add(automovil); // o motocicleta / camion
+        localStorage.SetItem("archivo_vehiculos", vehiculosGenerales);
+
     }
 
     private void GuardarMotocicleta()
@@ -135,6 +140,10 @@
         lista.Add(motocicleta);
         localStorage.SetItem("motocicletas", lista);
         NavigationManager.NavigateTo("/listado-motocicletas");
+        var vehiculosGenerales = localStorage.GetItem<List<Vehiculos>>("archivo_vehiculos") ?? new();
+        vehiculosGenerales.Add(automovil); // o motocicleta / camion
+        localStorage.SetItem("archivo_vehiculos", vehiculosGenerales);
+
     }
 
     private void GuardarCamion()
@@ -143,6 +152,10 @@
         lista.Add(camion);
         localStorage.SetItem("camiones", lista);
         NavigationManager.NavigateTo("/listado-camiones");
+        var vehiculosGenerales = localStorage.GetItem<List<Vehiculos>>("archivo_vehiculos") ?? new();
+        vehiculosGenerales.Add(automovil); // o motocicleta / camion
+        localStorage.SetItem("archivo_vehiculos", vehiculosGenerales);
+
     }
 
 }

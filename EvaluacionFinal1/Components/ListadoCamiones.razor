@@ -1,9 +1,8 @@
-﻿@page "/listado-camiones"
-@using Blazored.LocalStorage
+﻿@using Blazored.LocalStorage
 @using Models
 @inject ISyncLocalStorageService localStorage
 
-<h3>Listado de Camiones</h3>
+<h4>Camiones Registrados</h4>
 
 @if (camiones.Count == 0)
 {
@@ -35,6 +34,7 @@ else
         </tbody>
     </table>
 }
+
 
 @code {
     private List<Camion> camiones = new();

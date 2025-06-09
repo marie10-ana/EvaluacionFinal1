@@ -1,0 +1,47 @@
+﻿@page "/listado-camiones"
+@using Blazored.LocalStorage
+@using Models
+@inject ISyncLocalStorageService localStorage
+
+<h3>Listado de Camiones</h3>
+
+@if (camiones.Count == 0)
+{
+    <p>No hay camiones registrados.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Chasis</th>
+                <th>Marca</th>
+                <th>Año</th>
+                <th>Capacidad</th>
+                <th>Llantas</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in camiones)
+            {
+                <tr>
+                    <td>@c.NumChasis</td>
+                    <td>@c.Marca</td>
+                    <td>@c.AnioFabricacion</td>
+                    <td>@c.Capacidad</td>
+                    <td>@c.NumLlantas</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Camion> camiones = new();
+
+    protected override void OnInitialized()
+    {
+        camiones = localStorage.GetItem<List<Camion>>("camiones") ?? new();
+    }
+}
+

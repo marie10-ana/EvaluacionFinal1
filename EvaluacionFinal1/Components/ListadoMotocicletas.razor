@@ -1,0 +1,46 @@
+﻿@page "/listado-motocicletas"
+@using Blazored.LocalStorage
+@using Models
+@inject ISyncLocalStorageService localStorage
+
+<h3>Listado de Motocicletas</h3>
+
+@if (motocicletas.Count == 0)
+{
+    <p>No hay motocicletas registradas.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Chasis</th>
+                <th>Marca</th>
+                <th>Año</th>
+                <th>Cilindrada</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in motocicletas)
+            {
+                <tr>
+                    <td>@m.NumChasis</td>
+                    <td>@m.Marca</td>
+                    <td>@m.AnioFabricacion</td>
+                    <td>@m.Cilindrada</td>
+                    <td>@m.Tipo</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Motocicleta> motocicletas = new();
+
+    protected override void OnInitialized()
+    {
+        motocicletas = localStorage.GetItem<List<Motocicleta>>("motocicletas") ?? new();
+    }
+}

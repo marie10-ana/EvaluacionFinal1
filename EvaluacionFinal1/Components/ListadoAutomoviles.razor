@@ -1,0 +1,46 @@
+﻿@page "/listado-automoviles"
+@using Blazored.LocalStorage
+@using Models
+@inject ISyncLocalStorageService localStorage
+
+<h3>Listado de Automóviles</h3>
+
+@if (automoviles.Count == 0)
+{
+    <p>No hay automóviles registrados.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Chasis</th>
+                <th>Marca</th>
+                <th>Año</th>
+                <th>Puertas</th>
+                <th>Combustible</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in automoviles)
+            {
+                <tr>
+                    <td>@a.NumChasis</td>
+                    <td>@a.Marca</td>
+                    <td>@a.AnioFabricacion</td>
+                    <td>@a.NumPuertas</td>
+                    <td>@a.TipoCombustible</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Automovil> automoviles = new();
+
+    protected override void OnInitialized()
+    {
+        automoviles = localStorage.GetItem<List<Automovil>>("automoviles") ?? new();
+    }
+}
